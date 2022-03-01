@@ -8,9 +8,35 @@
 import SwiftUI
 
 struct ContentView: View {
+    var moves = ["rock", "paper", "scissors"]
+    @State private var currentChoice: String = "Test"
+    @State private var shouldWin: Bool = false
+    
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        VStack {
+            Spacer()
+            HStack {
+                Button {
+                    // Function goes here
+                } label: {
+                    Text("Rock")
+                    
+                }.buttonStyle(.bordered)
+                Button {
+                    // Function goes here
+                } label: {
+                    Text("Paper")
+                }.buttonStyle(.bordered)
+                Button {
+                    // Function goes here
+                } label: {
+                    Text("Scissors")
+                }.buttonStyle(.bordered)
+            }
+            TextField("Current Choice", text:$currentChoice)
+            Spacer()
+            Spacer()
+        }
     }
 }
 
