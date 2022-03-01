@@ -36,6 +36,7 @@
 		74968D9327CE5AF300EC1F01 = {
 			isa = PBXGroup;
 			children = (
+				74968DAD27CE5B9200EC1F01 /* README.md */,
 				74968D9E27CE5AF300EC1F01 /* RockPaperScissors */,
 				74968D9D27CE5AF300EC1F01 /* Products */,
 			);
@@ -56,7 +57,6 @@
 				74968DA127CE5AF300EC1F01 /* ContentView.swift */,
 				74968DA327CE5AF400EC1F01 /* Assets.xcassets */,
 				74968DA527CE5AF400EC1F01 /* Preview Content */,
-				74968DAD27CE5B9200EC1F01 /* README.md */,
 			);
 			path = RockPaperScissors;
 			sourceTree = "<group>";
