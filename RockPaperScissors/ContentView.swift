@@ -14,6 +14,9 @@ struct ContentView: View {
     @State private var shouldWin: Bool?
     @State private var currentMessage:String = ""
     @State private var currentScoreInt:Int = 0
+    @State private var showingAlert:Bool = false
+    @State private var finalResult:String = ""
+
     
     func makePlayerChoice(choice: String) {
         playerChoice = choice
@@ -44,6 +47,19 @@ struct ContentView: View {
         }
     }
     
+    func checkWinner() {
+        if currentScoreInt == 2 {
+            finalResult = "You won with a score of 2" // in how many rounds
+            showingAlert = true
+            currentScoreInt = 0
+        } else if currentScoreInt == -2 {
+            finalResult = "You lost with a score of -2" // in how many rounds
+            showingAlert = true
+            currentScoreInt = 0
+
+        }
+    }
+    
     
     var body: some View {
         NavigationView{
@@ -57,6 +73,7 @@ struct ContentView: View {
                             makePlayerChoice(choice: "rock")
                             makeComputerChoice()
                             checkResult()
+                            checkWinner()
                         } label: {
                             Text("Rock")
                         }.buttonStyle(.bordered)
@@ -64,6 +81,7 @@ struct ContentView: View {
                             makePlayerChoice(choice: "paper")
                             makeComputerChoice()
                             checkResult()
+                            checkWinner()
                         } label: {
                             Text("Paper")
                         }.buttonStyle(.bordered)
@@ -71,6 +89,7 @@ struct ContentView: View {
                             makePlayerChoice(choice: "scissors")
                             makeComputerChoice()
                             checkResult()
+                            checkWinner()
                         } label: {
                             Text("Scissors")
                         }.buttonStyle(.bordered)
@@ -86,7 +105,9 @@ struct ContentView: View {
             .navigationTitle("Rock, Paper, Scissors")
             
         }
-        
+        .alert("Game finished. \(finalResult)", isPresented: $showingAlert) {
+            Button("Play again") {}
+        }
     }
 }
 
