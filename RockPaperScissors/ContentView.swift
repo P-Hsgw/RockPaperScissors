@@ -12,10 +12,11 @@ struct ContentView: View {
     @State private var playerChoice: String = ""
     @State private var computerChoice: String = ""
     @State private var currentMessage:String = ""
-    @State private var currentScoreInt:Int = 0
+    @State private var currentPlayerScoreInt:Int = 0
+    @State private var currentComputerScoreInt: Int = 0
     @State private var showingAlert:Bool = false
     @State private var finalResult:String = ""
-
+    
     
     func makePlayerChoice(choice: String) {
         playerChoice = choice
@@ -39,23 +40,26 @@ struct ContentView: View {
             currentMessage = "Computer chose \(computerChoice). It's a tie"
         } else if computerChoice == "rock" && playerChoice == "scissors" || computerChoice == "paper" && playerChoice == "rock" || computerChoice == "scissors" && playerChoice == "paper" {
             currentMessage = "Computer chose \(computerChoice). Computer wins this time"
-            currentScoreInt -= 1
+            currentPlayerScoreInt += 1
         } else {
             currentMessage = "Computer chose \(computerChoice). You won this time"
-            currentScoreInt += 1
+            currentComputerScoreInt += 1
         }
     }
     
     func checkWinner() {
-        if currentScoreInt == 2 {
-            finalResult = "You won with a score of 2" // in how many rounds
+        if currentComputerScoreInt == 2 {
+            finalResult = "Computer won" // in how many rounds
             showingAlert = true
-            currentScoreInt = 0
-        } else if currentScoreInt == -2 {
-            finalResult = "You lost with a score of -2" // in how many rounds
+            currentComputerScoreInt = 0
+            currentPlayerScoreInt = 0
+            finalResult = ""
+        } else if currentPlayerScoreInt == -2 {
+            finalResult = "You won" // in how many rounds
             showingAlert = true
-            currentScoreInt = 0
-
+            currentPlayerScoreInt = 0
+            currentComputerScoreInt = 0
+            finalResult = ""
         }
     }
     
@@ -63,8 +67,13 @@ struct ContentView: View {
     var body: some View {
         NavigationView{
             VStack {
-                Section{
-                    Text(String(currentScoreInt))
+                HStack{
+                    Section{
+                        Text("Your score: \(String(currentPlayerScoreInt))").padding()
+                        Spacer()
+                        Text("Computer score: \(String(currentComputerScoreInt))").padding()
+                    }
+                    
                 }
                 Section {
                     HStack {
