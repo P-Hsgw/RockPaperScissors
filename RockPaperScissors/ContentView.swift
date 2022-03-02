@@ -11,7 +11,6 @@ struct ContentView: View {
     var moves = ["rock", "paper", "scissors"]
     @State private var playerChoice: String = ""
     @State private var computerChoice: String = ""
-    @State private var shouldWin: Bool?
     @State private var currentMessage:String = ""
     @State private var currentScoreInt:Int = 0
     @State private var showingAlert:Bool = false
