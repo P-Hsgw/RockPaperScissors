@@ -9,34 +9,60 @@ import SwiftUI
 
 struct ContentView: View {
     var moves = ["rock", "paper", "scissors"]
-    @State private var currentChoice: String = "Test"
-    @State private var shouldWin: Bool = false
+    @State private var currentChoice: String = ""
+    @State private var shouldWin: Bool?
+    
+    func makePlayerChoice(choice: String) {
+        currentChoice = choice.uppercased()
+    }
+    
+    func makeComputerChoice() {
+        let randomChoice = Int.random(in: 1...2)
+        var choice: Bool?
+        if randomChoice == 1 {
+            choice = false
+        } else if randomChoice == 2{
+            choice = true
+        }
+        shouldWin = choice
+    }
+    
+    
     
     var body: some View {
-        VStack {
-            Spacer()
-            HStack {
-                Button {
-                    // Function goes here
-                } label: {
-                    Text("Rock")
-                    
-                }.buttonStyle(.bordered)
-                Button {
-                    // Function goes here
-                } label: {
-                    Text("Paper")
-                }.buttonStyle(.bordered)
-                Button {
-                    // Function goes here
-                } label: {
-                    Text("Scissors")
-                }.buttonStyle(.bordered)
+        NavigationView{
+            VStack {
+                Section {
+                    HStack {
+                        Button {
+                            makePlayerChoice(choice: "rock")
+                            makeComputerChoice()
+                        } label: {
+                            Text("Rock")
+                        }.buttonStyle(.bordered)
+                        Button {
+                            makePlayerChoice(choice: "paper")
+                        } label: {
+                            Text("Paper")
+                        }.buttonStyle(.bordered)
+                        Button {
+                            makePlayerChoice(choice: "scissors")
+                        } label: {
+                            Text("Scissors")
+                        }.buttonStyle(.bordered)
+                    }
+                }header: {
+                    Text("Chose your destiny")
+                }
+                Text(currentChoice)
+                    .padding()
+                Spacer()
+                
             }
-            TextField("Current Choice", text:$currentChoice)
-            Spacer()
-            Spacer()
+            .navigationTitle("Rock, Paper, Scissors")
+            
         }
+        
     }
 }
 
