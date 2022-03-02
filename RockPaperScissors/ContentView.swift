@@ -13,6 +13,7 @@ struct ContentView: View {
     @State private var computerChoice: String = ""
     @State private var shouldWin: Bool?
     @State private var currentMessage:String = ""
+    @State private var currentScoreInt:Int = 0
     
     func makePlayerChoice(choice: String) {
         playerChoice = choice
@@ -33,11 +34,13 @@ struct ContentView: View {
     
     func checkResult() {
         if computerChoice == playerChoice {
-            currentMessage = "It's a tie"
+            currentMessage = "Computer chose \(computerChoice). It's a tie"
         } else if computerChoice == "rock" && playerChoice == "scissors" || computerChoice == "paper" && playerChoice == "rock" || computerChoice == "scissors" && playerChoice == "paper" {
-            currentMessage = "Computer wins this time"
+            currentMessage = "Computer chose \(computerChoice). Computer wins this time"
+            currentScoreInt -= 1
         } else {
-            currentMessage = "You won this time"
+            currentMessage = "Computer chose \(computerChoice). You won this time"
+            currentScoreInt += 1
         }
     }
     
@@ -45,6 +48,9 @@ struct ContentView: View {
     var body: some View {
         NavigationView{
             VStack {
+                Section{
+                    Text(String(currentScoreInt))
+                }
                 Section {
                     HStack {
                         Button {
