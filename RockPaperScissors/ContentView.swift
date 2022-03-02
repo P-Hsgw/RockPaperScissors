@@ -38,7 +38,9 @@ struct ContentView: View {
     func checkResult() {
         if computerChoice == playerChoice {
             currentMessage = "Computer chose \(computerChoice). It's a tie"
-        } else if computerChoice == "rock" && playerChoice == "scissors" || computerChoice == "paper" && playerChoice == "rock" || computerChoice == "scissors" && playerChoice == "paper" {
+        } else if computerChoice == "rock" && playerChoice == "scissors" ||
+                    computerChoice == "paper" && playerChoice == "rock" ||
+                    computerChoice == "scissors" && playerChoice == "paper" {
             currentMessage = "Computer chose \(computerChoice). Computer wins this time"
             currentPlayerScoreInt += 1
         } else {
@@ -49,13 +51,13 @@ struct ContentView: View {
     
     func checkWinner() {
         if currentComputerScoreInt == 2 {
-            finalResult = "Computer won" // in how many rounds
+            finalResult = "Computer won"
             showingAlert = true
             currentComputerScoreInt = 0
             currentPlayerScoreInt = 0
             finalResult = ""
         } else if currentPlayerScoreInt == -2 {
-            finalResult = "You won" // in how many rounds
+            finalResult = "You won"
             showingAlert = true
             currentPlayerScoreInt = 0
             currentComputerScoreInt = 0
